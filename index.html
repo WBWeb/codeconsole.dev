@@ -1,17 +1,107 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en-US">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Welcome to Code Console</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #222224;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        .type-text {
+            font-family: "Pixelify Sans", serif;
+            color: #ccc;
+            font-size: 3.2rem; /* Large font size for larger screens */
+            white-space: nowrap; /* Prevent wrapping on larger screens */
+            overflow: hidden;
+            border-right: 0.2em solid #ccc; /* Thicker caret */
+            display: inline-block;
+            padding-right: 0.2em; /* Space for the caret */
+            position: relative; /* Position relative for caret blinking */
+            line-height: 1; /* Ensure caret is vertically aligned */
+        }
+
+        /* Underline style for the specific text */
+        .underline {
+            text-decoration: underline; /* Underline the text */
+            color: #90e577; /* Optional: Change color to match other text */
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 600px) {
+            .type-text {
+                font-size: 2rem; /* Adjusted font size for mobile */
+                white-space: normal; /* Allow text wrapping */
+                width: auto; /* Let the width adjust based on content */
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <div class="type-text" id="typewriter">&gt; </div>
 
-    <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
-        <!-- <div>Last Login &#58; Saturday, Nov 2, 2024, 03:14:07</div> -->
-        <div>> &nbsp; <span class="type-text">hello, <u>codeconsole.dev</u> is lauching soon. </span></div>
-    </body>
+    <script>
+        const text = "Hello, codeconsole.dev is launching soon."; // Main text
+        const underlinedText = "codeconsole.dev"; // Text to underline
+        const typeSpeed = 200; // Typing speed in milliseconds
+        const initialBlinkSpeed = 200; // Initial blinking speed (while typing)
+        const finalBlinkSpeed = 200; // Final blinking speed (after typing)
+        let index = 0;
+        let isBlinking = true;
+        let blinkInterval; // To store the blinking interval
 
+        // Function to start blinking the caret
+        function startBlinkingCaret(speed) {
+            const typewriterElement = document.getElementById("typewriter");
+            clearInterval(blinkInterval); // Clear any existing interval
+            blinkInterval = setInterval(() => {
+                typewriterElement.style.borderRightColor = isBlinking ? "transparent" : "#ccc";
+                isBlinking = !isBlinking; // Toggle blinking state
+            }, speed); // Use the provided speed for blinking interval
+        }
+
+        function stopBlinkingCaret() {
+            clearInterval(blinkInterval); // Stop the blinking when typing is done
+            const typewriterElement = document.getElementById("typewriter");
+            typewriterElement.style.borderRightColor = "#ccc"; // Ensure caret is visible after typing
+        }
+
+        function typeWriter() {
+            const typewriterElement = document.getElementById("typewriter");
+            const textLength = text.length; // Total length of the text
+
+            // Start blinking the caret with initial speed before typing starts
+            startBlinkingCaret(initialBlinkSpeed);
+
+            if (index < textLength) {
+                // Check if we are typing the underlined text
+                const currentText = text.substring(0, index + 1);
+                const formattedText = currentText.replace(underlinedText, `<span class='underline'>${underlinedText}</span>`);
+                
+                typewriterElement.innerHTML = `&gt; ${formattedText}`; // Use innerHTML to render HTML
+                index++;
+                setTimeout(typeWriter, typeSpeed); // Repeat function with delay
+            } else {
+                // Stop the initial caret blinking
+                stopBlinkingCaret();
+
+                // Start final blinking after a short delay
+                setTimeout(() => {
+                    startBlinkingCaret(finalBlinkSpeed); // Set final blinking speed to 3 seconds
+                }, 0); // Optional delay before starting the 3-second blinking
+            }
+        }
+
+        // Start the typing effect
+        typeWriter();
+    </script>
+</body>
 </html>
