@@ -3,7 +3,7 @@
 }
 *::selection {
   color: #222224;
-  background-color: #90e577;
+  background-color: #fff;
 }
 
 body {
@@ -12,7 +12,7 @@ body {
   font-family: "Pixelify Sans", serif;
   font-optical-sizing: auto;
   font-style: normal;
-  color: #90e577;
+  color: #fff;
   padding: 0.5rem 1rem;
   font-size: 5rem;
   display: flex;
@@ -29,7 +29,7 @@ div {
 
 .type-text {
   display: inline-block;
-  border-right: 0.7rem solid #3af10e;
+  border-right: 0.7rem solid #cccccc;
   white-space: nowrap;
   overflow: hidden;
   margin-right: auto;
@@ -41,7 +41,7 @@ div {
     border-color: transparent;
   }
   50% {
-    border-color: #3af10e;
+    border-color: #cccccc;
   }
   100% {
     border-color: transparent;
