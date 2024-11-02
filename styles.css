@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+}
+*::selection {
+  color: #222224;
+  background-color: #90e577;
+}
+
+body {
+  height: 100vh;
+  background: #222224;
+  font-family: "Pixelify Sans", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: #90e577;
+  padding: 0.5rem 1rem;
+  font-size: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+}
+
+.type-text {
+  display: inline-block;
+  border-right: 0.7rem solid #3af10e;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: auto;
+  animation: typing 3s steps(16, end), caret-animation 0.8s step-end infinite;
+}
+
+@keyframes caret-animation {
+  0% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #3af10e;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
